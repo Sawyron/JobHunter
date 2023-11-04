@@ -1,0 +1,16 @@
+.container {
+  padding-top: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: justify;
+}
+.swiper {
+  width: 45vw;
+  height: 66vh;
+}
+.emloyer-logo {
+  display: block;
+  max-width: 25vw;
+  max-height: 45vh;
+  margin: 10% auto;
+}
