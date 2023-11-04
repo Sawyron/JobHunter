@@ -34,6 +34,7 @@ const vacancyHtmlElements = vacancies
       logoElement.src = imageLogo;
     }
     const resultElement = document.createElement('div');
+    resultElement.classList.add('swiper-content');
     const urlElement = document.createElement('a');
     urlElement.setAttribute('href', vacancy.alternate_url);
     urlElement.textContent = 'Перейти';

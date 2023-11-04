@@ -1,16 +1,23 @@
 .container {
-  padding-top: 2rem;
+  padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
   text-align: justify;
 }
 .swiper {
   width: 45vw;
-  height: 66vh;
+  height: 100%;
 }
 .emloyer-logo {
   display: block;
   max-width: 25vw;
   max-height: 45vh;
   margin: 10% auto;
+}
+.swiper-slide {
+  height: auto !important;
+  text-align: justify;
+}
+.swiper-content {
+  height: 100% !important;
 }
