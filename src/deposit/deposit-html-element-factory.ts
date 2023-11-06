@@ -77,7 +77,7 @@ function attachDepositCalculator(
   depositRunBtn?.addEventListener('click', e => {
     e.preventDefault();
     const depositCalculator = new DepositCalculator(currentMounthToPeriodMap);
-    const depositInput = root?.querySelector<HTMLInputElement>(
+    const depositInput = root.querySelector<HTMLInputElement>(
       'input#deposit-amount'
     );
     const deposit = Number(depositInput?.value);

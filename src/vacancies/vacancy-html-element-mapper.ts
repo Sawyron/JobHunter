@@ -1,5 +1,5 @@
 import { IVacancyResponse } from './vacancy-response.interface.js';
-import imageLogo from '../../public/images/job_log.png';
+import defaultEmployerLogo from '../../public/images/job_log.png';
 
 export function mapVacancyToHTMLDivElement(
   vacancy: IVacancyResponse
@@ -28,7 +28,7 @@ export function mapVacancyToHTMLDivElement(
   if (vacancy.employer.logo_urls) {
     logoElement.src = vacancy.employer.logo_urls.original;
   } else {
-    logoElement.src = imageLogo;
+    logoElement.src = defaultEmployerLogo;
   }
   const resultElement = document.createElement('div');
   resultElement.classList.add('swiper-content');
