@@ -21,3 +21,13 @@
 .swiper-content {
   height: 100% !important;
 }
+#vacancy-search-submit {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+#search-vacancy-input {
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

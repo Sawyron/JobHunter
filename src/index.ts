@@ -1,21 +1,8 @@
 import '../public/styles.css';
-import { swiper } from './swiper-init.js';
-import { VacancyService } from './vacancies/vacancy-service.js';
-import { mapVacancyToHTMLDivElement } from './vacancies/vacancy-html-element-mapper.js';
 import { initializeDepositHtmlElement } from './deposit/deposit-html-element-factory.js';
+import { initializeVacancySearch } from './vacancies/vacancy-search-html-element-init.js';
 
-const service = new VacancyService();
-const vacancies = await service.getVacancies();
-const vacancyHtmlElements = vacancies
-  .map(vacancy => mapVacancyToHTMLDivElement(vacancy))
-  .map(element => {
-    const slideElement = document.createElement('div');
-    slideElement.classList.add('swiper-slide');
-    slideElement.append(element);
-    return slideElement;
-  });
-
-swiper.appendSlide(vacancyHtmlElements);
+initializeVacancySearch();
 initializeDepositHtmlElement([
   {
     name: 'Пополняемый',
