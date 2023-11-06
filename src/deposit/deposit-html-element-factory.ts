@@ -11,13 +11,13 @@ export function initializeDepositHtmlElement(
   const nameToMap = new Map(
     configurations.map(({ name, monthsToPercent }) => [name, monthsToPercent])
   );
-  const root = document.querySelector<HTMLElement>('.deposit-calculator');
-  const depositTypeSelector = root?.querySelector<HTMLSelectElement>(
+  const root = document.querySelector<HTMLElement>('.deposit-calculator')!;
+  const depositTypeSelector = root.querySelector<HTMLSelectElement>(
     'select#deposit-type'
   );
-  const periodSelector = root?.querySelector<HTMLSelectElement>(
+  const periodSelector = root.querySelector<HTMLSelectElement>(
     'select#deposit-period'
-  );
+  )!;
   depositTypeSelector?.append(
     ...Array.from(nameToMap.keys()).map(name => {
       const option = document.createElement('option');
@@ -29,16 +29,16 @@ export function initializeDepositHtmlElement(
   depositTypeSelector?.addEventListener('change', e => {
     e.preventDefault();
     const depositType = (e.target as HTMLSelectElement).value;
-    attachPeriods(root!, depositType, nameToMap);
+    attachPeriods(root, depositType, nameToMap);
   });
-  periodSelector?.addEventListener('change', e => {
+  periodSelector.addEventListener('change', e => {
     e.preventDefault();
     const depositType = depositTypeSelector!.value;
     const currentMap = nameToMap.get(depositType);
-    attachDepositCalculator(root!, currentMap!);
+    attachDepositCalculator(root, currentMap!);
   });
   const defaultType = configurations[0].name;
-  attachPeriods(root!, defaultType, nameToMap);
+  attachPeriods(root, defaultType, nameToMap);
 }
 
 function attachPeriods(
@@ -46,15 +46,13 @@ function attachPeriods(
   depositType: string,
   nameToMap: Map<string, Map<number, number>>
 ) {
-  const currentMounthToPeriodMap = nameToMap.get(depositType)!;
+  const currentMounthToPercentMap = nameToMap.get(depositType)!;
   const periodSelector = root?.querySelector<HTMLSelectElement>(
     'select#deposit-period'
-  );
-  if (periodSelector) {
-    periodSelector.innerHTML = '';
-  }
+  )!;
+  periodSelector.innerHTML = '';
   periodSelector?.append(
-    ...Array.from(currentMounthToPeriodMap.entries()).map(
+    ...Array.from(currentMounthToPercentMap.entries()).map(
       ([period, percent]) => {
         const option = document.createElement('option');
         option.value = period.toString();
@@ -63,7 +61,7 @@ function attachPeriods(
       }
     )
   );
-  attachDepositCalculator(root, currentMounthToPeriodMap);
+  attachDepositCalculator(root, currentMounthToPercentMap);
 }
 
 function attachDepositCalculator(
@@ -84,12 +82,14 @@ function attachDepositCalculator(
     );
     const deposit = Number(depositInput?.value);
     const result = depositCalculator.calculateDeposit(deposit, period);
-    const resultElement = root?.querySelector<HTMLElement>('.deposit-output');
-    if (resultElement) {
-      resultElement.innerText = '';
-      resultElement.innerText = `Вклад: ${deposit}, процент: ${
-        currentMounthToPeriodMap.get(period)! * 100
-      } %, итого: ${result}`;
-    }
+    const resultElement = root?.querySelector<HTMLElement>('.deposit-output')!;
+    const depositFomatter = new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUR',
+    });
+    resultElement.innerText = '';
+    resultElement.innerText = `Вклад: ${deposit}, процент: ${
+      currentMounthToPeriodMap.get(period)! * 100
+    } %, итого: ${depositFomatter.format(result)}`;
   });
 }
