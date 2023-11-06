@@ -9,7 +9,10 @@
   </head>
   <body>
     <header>
-      <div class="container"><h1>Hello from Webpack</h1></div>
+      <div class="container">
+        <h1>Hello from Webpack</h1>
+        <a href="deposit.html">Расчёт вклада</a>
+      </div>
     </header>
     <div class="container">
       <form>
@@ -25,7 +28,13 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-scrollbar"></div>
       </div>
-      <div class="container" id="debug"></div>
+      <div class="container deposit-calculator">
+        <select name="deposit-option" id="deposit-type"></select>
+        <select name="period" id="deposit-period"></select>
+        <input type="number" name="deposit-amount" id="deposit-amount" />
+        <button type="button" class="deposit-run-btn">Рассчитать</button>
+        <p class="deposit-output"></p>
+      </div>
     </main>
   </body>
 </html>
